@@ -2,8 +2,6 @@
 resource "azurerm_resource_group" "this" {
   name     = "kopicloud-rg"
   location = var.region
-
-  tags = local.tags
 }
 
 # Access information about an existing User Assigned Identity
