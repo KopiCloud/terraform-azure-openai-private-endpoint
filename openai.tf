@@ -3,7 +3,7 @@ resource "azurerm_cognitive_account" "this" {
   name                = "kopicloud-aca"
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  kind                = "OpenAI"
+  kind                = var.cognitive_account_kind_name
   sku_name            = var.cognitive_account_sku_name
 
   public_network_access_enabled      = var.public_network_access_enabled
