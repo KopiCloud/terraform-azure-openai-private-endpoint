@@ -9,6 +9,12 @@ variable "cognitive_account_sku_name" {
   default     = "S0"
 }
 
+variable "cognitive_account_kind_name" {
+  type        = string
+  description = "Specifies the SKU Name for this Cognitive Service Account"
+  default     = "OpenAI"
+}
+
 variable "cognitive_deployment_name" {
   type        = string
   description = "The name of the Cognitive Services Account Deployment model"
