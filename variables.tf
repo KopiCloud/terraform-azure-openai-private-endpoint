@@ -1,7 +1,82 @@
-variable "region" {
+################################
+## Azure Provider - Variables ##
+################################
+
+# Azure authentication variables
+
+variable "azure-subscription-id" {
   type        = string
-  description = "The region in which this module should be deployed"
+  description = "Azure Subscription ID"
 }
+
+variable "azure-client-id" {
+  type        = string
+  description = "Azure Client ID"
+}
+
+variable "azure-client-secret" {
+  type        = string
+  description = "Azure Client Secret"
+}
+
+variable "azure-tenant-id" {
+  type        = string
+  description = "Azure Tenant ID"
+}
+
+#############################
+## Application - Variables ##
+#############################
+
+# Company name 
+variable "company" {
+  type        = string
+  description = "This variable defines the company name used to build resources"
+}
+
+# Application name 
+variable "app_name" {
+  type        = string
+  description = "This variable defines the application name used to build resources"
+}
+
+# Environment
+variable "environment" {
+  type        = string
+  description = "This variable defines the environment to be built"
+}
+
+# Azure region
+variable "location" {
+  type        = string
+  description = "Azure region where resources will be created"
+  default     = "west europe"
+}
+
+# Azure short region
+variable "shortlocation" {
+  type        = string
+  description = "Azure region where resources will be created"
+  default     = "we"
+}
+
+#########################
+## Network - Variables ##
+#########################
+
+variable "vnet_address_space" {
+  type        = string
+  description = "VNET for OpenAI VNET"
+}
+
+variable "subnet_address_space" {
+  type        = string
+  description = "Subnet for OpenAI Public Endpoint"
+}
+
+####################################
+## Cognitive Services - Variables ##
+####################################
 
 variable "cognitive_account_sku_name" {
   type        = string
@@ -15,22 +90,22 @@ variable "cognitive_account_kind_name" {
   default     = "OpenAI"
 }
 
-variable "cognitive_deployment_name" {
-  type        = string
-  description = "The name of the Cognitive Services Account Deployment model"
-  default     = "gpt-35-turbo"
-}
-
-variable "cognitive_deployment_version" {
-  type        = string
-  description = "The version of the Cognitive Services Account Deployment model"
-  default     = "0301"
-}
-
-variable "cognitive_deployment_scale_type" {
-  type        = string
-  description = "Deployment scale type"
-  default     = "Standard"
+variable "cognitive_deployment" {
+  description = "List of Cognitive Deployments"
+  type = list(object({
+    name       = string
+    type       = string
+    version    = string
+    scale_type = string
+  }))
+  default = [
+    {
+      name       = "gpt35"
+      type       = "gpt-35-turbo"
+      version    = "0301"
+      scale_type = "Standard"
+    }
+  ]
 }
 
 variable "public_network_access_enabled" {
@@ -45,16 +120,6 @@ variable "outbound_network_access_restricted" {
   default     = true
 }
 
-variable "vnet_address_space" {
-  type        = string
-  description = "VNET for OpenAI Public Endpoint"
-}
-
-variable "subnet_address_space" {
-  type        = string
-  description = "Subnet for OpenAI Public Endpoint"
-}
-
 variable "network_acls_default_action" {
   type        = string
   description = "The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny."
@@ -65,4 +130,13 @@ variable "network_acls_ip_rules" {
   type        = list(string)
   description = "One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account."
   default     = []
+}
+
+#####################
+## DNS - Variables ##
+#####################
+
+variable "private_dns_resource_group" {
+  type        = string
+  description = "The Resource Group where the Private DNS for OpenAI was created"
 }

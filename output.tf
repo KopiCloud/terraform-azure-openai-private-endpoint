@@ -21,9 +21,20 @@ output "azurerm_cognitive_account_identity" {
 output "azurerm_cognitive_account_primary_access_key" {
   value       = azurerm_cognitive_account.this.primary_access_key
   description = "A primary access key which can be used to connect to the Cognitive Service Account"
+  sensitive   = true
 } 
 
 output "azurerm_cognitive_account_secondary_access_key" {
   value       = azurerm_cognitive_account.this.secondary_access_key
   description = "A secondary access key which can be used to connect to the Cognitive Service Account"
+  sensitive   = true
+}
+
+output "azurerm_cognitive_deployment" {
+  value       = azurerm_cognitive_deployment.this.*
+  description = "List of Cognitive Service Deployments"
+}
+
+output "public_ip_address" {
+  value = data.http.ip.response_body
 }
