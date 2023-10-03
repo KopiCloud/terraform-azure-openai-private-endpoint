@@ -37,21 +37,23 @@ Variable | Description | Type
 --- | --- | ---
 `cognitive_deployment` | List of Azure OpenAI Cognitive Deployments | `list(object)`
   
-  type = list(object({
-    name       = string --> Name of the Deployment
-    type       = string --> Type of the Deployment
-    version    = string --> Version of the Deployment
-    scale_type = string --> Scale Type of the Deployment
-  }))
-  
-  default = [
-    {
-      name       = "gpt35"
-      type       = "gpt-35-turbo"
-      version    = "0301"
-      scale_type = "Standard"
-    }
-  ]
+- name       = string --> Name of the Deployment
+- type       = string --> Type of the Deployment
+- version    = string --> Version of the Deployment
+- scale_type = string --> Scale Type of the Deployment
+
+Default:
+
+```
+default = [
+  {
+    name       = "gpt35"
+    type       = "gpt-35-turbo"
+    version    = "0301"
+    scale_type = "Standard"
+  }
+]
+```
 
 ## How To deploy the code:
 
