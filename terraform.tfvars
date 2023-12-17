@@ -24,8 +24,8 @@ subnet_address_space = "10.120.1.0/24"
 ##########
 # OpenAI #
 ##########
-public_network_access_enabled      = false
-outbound_network_access_restricted = false
+public_network_access_enabled      = true
+outbound_network_access_restricted = true
 network_acls_default_action        = "Deny"
 
 cognitive_deployment = [
