@@ -9,12 +9,13 @@ resource "azurerm_cognitive_deployment" "this" {
   cognitive_account_id = azurerm_cognitive_account.this.id
   
   model {
-    format  = "OpenAI"
+    format  = each.value.format
     name    = each.value.type
     version = each.value.version
   }
 
   scale {
-    type = each.value.scale_type
+    type     = each.value.scale_type
+    capacity = each.value.capacity
   }
 }
