@@ -3,7 +3,9 @@
 
 ## Overview
 
-Deploying an Azure OpenAI with ChatGPT or Azure Cognitive Service with Private Endpoint
+Deploying an Azure OpenAI with ChatGPT or Azure Cognitive Service with a Private Endpoint
+
+Blog ==> https://medium.com/@gmusumeci/how-to-deploy-azure-openai-with-private-endpoint-and-chatgpt-using-terraform-253cfd1513aa
 
 ## Code creates:
 
@@ -25,7 +27,7 @@ Variable | Description | Type
 `subnet_address_space` | CIDR of the Subnet used for the Private Endpoint | `string`
 `public_network_access_enabled` | Enable public network access. Default: false | `bool`
 `outbound_network_access_restricted` | Whether outbound network access is restricted for the Cognitive Account. Default: true | `bool`
-`network_acls_default_action` | The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny. Default: "Deny" | `string`
+`network_acls_default_action` | The default action is to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny. Default: "Deny" | `string`
 `network_acls_ip_rules` | One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account | `list(string)`
 `private_dns_resource_group` | The Resource Group where the Private DNS for OpenAI was created | `string` 
 
@@ -38,9 +40,11 @@ Variable | Description | Type
 `cognitive_deployment` | List of Azure OpenAI Cognitive Deployments | `list(object)`
   
 - name       = string --> Name of the Deployment
+- format     = string --> Format of the Deployment
 - type       = string --> Type of the Deployment
 - version    = string --> Version of the Deployment
 - scale_type = string --> Scale Type of the Deployment
+- capacity   = number --> Tokens-per-Minute (TPM)
 
 Default:
 
@@ -48,9 +52,11 @@ Default:
 default = [
   {
     name       = "gpt35"
+    format     = "OpenAI"
     type       = "gpt-35-turbo"
     version    = "0301"
     scale_type = "Standard"
+    capacity   = 100
   }
 ]
 ```
