@@ -94,16 +94,20 @@ variable "cognitive_deployment" {
   description = "List of Cognitive Deployments"
   type = list(object({
     name       = string
+    format     = string
     type       = string
     version    = string
     scale_type = string
+    capacity   = number
   }))
   default = [
     {
       name       = "gpt35"
+      format     = "OpenAI"
       type       = "gpt-35-turbo"
       version    = "0301"
       scale_type = "Standard"
+      capacity   = 10
     }
   ]
 }
@@ -128,7 +132,7 @@ variable "network_acls_default_action" {
 
 variable "network_acls_ip_rules" {
   type        = list(string)
-  description = "One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account."
+  description = "One or more IP Addresses, or CIDR Blocks, which should be able to access the Cognitive Account."
   default     = []
 }
 
