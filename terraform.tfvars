@@ -31,15 +31,19 @@ network_acls_default_action        = "Deny"
 cognitive_deployment = [
   {
     name       = "gpt35"
+    format     = "OpenAI"
     type       = "gpt-35"
     version    = "0301"
     scale_type = "Standard"
+    capacity   = 100
   },
   {
     name       = "gpt35turbo"
+    format     = "OpenAI"
     type       = "gpt-35-turbo"
     version    = "0301"
     scale_type = "Standard"
+    capacity   = 100
   }
 ]
 
